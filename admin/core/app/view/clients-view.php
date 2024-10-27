@@ -1,3 +1,21 @@
+<?php
+include "../admin/core/app/model/ClientData.php";
+require_once '../admin/core/app/vendor/autoload.php';
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\LineFormatter;
+date_default_timezone_set('America/Lima'); 
+
+$log = new Logger('MENSAJE:');
+$stream = new StreamHandler('app.log');
+$formatter = new LineFormatter(null, 'Y-m-d H:i:s', true);
+$stream->setFormatter($formatter);
+$log->pushHandler($stream);
+$log->info('INGRESO A VISUALIZAR LISTA DE CLIENTES' );
+
+?>
+
 <div class="row">
 	<div class="col-md-12">
 <div class="btn-group pull-right">
@@ -7,6 +25,7 @@
   </button>
   <ul class="dropdown-menu" role="menu">
     <li><a href="report/client-word.php">Word 2007 (.docx)</a></li>
+	<li><a href="log/info.php">log</a></li>
   </ul>
 </div>
 

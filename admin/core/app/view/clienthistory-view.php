@@ -1,5 +1,24 @@
 <?php
+
+
+include "../admin/core/app/model/ClientData.php";
+include "../admin/core/app/model/EmployedData.php";
+include "../admin/core/app/model/ReservationData.php";
+require_once '../admin/core/app/vendor/autoload.php';
 $client = ClientData::getById($_GET["id"]);
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\LineFormatter;
+date_default_timezone_set('America/Lima'); 
+
+$log = new Logger('MENSAJE:');
+$stream = new StreamHandler('app.log');
+$formatter = new LineFormatter(null, 'Y-m-d H:i:s', true);
+$stream->setFormatter($formatter);
+$log->pushHandler($stream);
+$log->info('INGRESO A HISTORIAL DE RESERVACIONES DEL CLIENTE: '.$client->name );
+
+
 ?>
 <div class="row">
 	<div class="col-md-12">

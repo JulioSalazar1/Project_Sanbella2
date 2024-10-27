@@ -1,5 +1,27 @@
 <?php
 
+include "../admin/core/app/model/ClientData.php";
+include "../admin/core/app/model/EmployedData.php";
+include "../admin/core/app/model/PaymentData.php";
+include "../admin/core/app/model/PostData.php";
+include "../admin/core/app/model/ReservationData.php";
+include "../admin/core/app/model/ServiceData.php";
+include "../admin/core/app/model/StatusData.php";
+include "../admin/core/app/model/UserData.php";
+require_once '../admin/core/app/vendor/autoload.php';
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\LineFormatter;
+date_default_timezone_set('America/Lima'); 
+
+$log = new Logger('MENSAJE:');
+$stream = new StreamHandler('app.log');
+$formatter = new LineFormatter(null, 'Y-m-d H:i:s', true);
+$stream->setFormatter($formatter);
+$log->pushHandler($stream);
+
+
 // define('LBROOT',getcwd()); // LegoBox Root ... the server root
 // include("core/controller/Database.php");
 
@@ -34,8 +56,10 @@ if($found==true) {
 //	print $_SESSION['userid'];
 	print "Cargando ... $user";
 	print "<script>window.location='index.php?view=home';</script>";
+	$log->info('USUARIO INGRESO AL SISTEMA CON EXITO' );
 }else {
 	print "<script>window.location='index.php?view=login';</script>";
+	$log->info('USUARIO NO INGRESO AL SISTEMA CON EXITO' );
 }
 
 }else{

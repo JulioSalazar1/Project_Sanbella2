@@ -1,4 +1,5 @@
 <?php
+
 class ClientData {
 	public static $tablename = "client";
 	public function ClientData(){
@@ -14,6 +15,9 @@ class ClientData {
 		$sql = "insert into ".self::$tablename." (name,lastname,gender,day_of_birth,address,phone,email,created_at) ";
 		$sql .= "value (\"$this->name\",\"$this->lastname\",\"$this->gender\",\"$this->day_of_birth\",\"$this->address\",\"$this->phone\",\"$this->email\",$this->created_at)";
 		Executor::doit($sql);
+			
+
+
 	}
 
 	public static function delById($id){
